@@ -2,7 +2,7 @@
 
 ## Presentaciones
 
-- [Día 01. Bienvenida https://ecologia2-master.github.io/recursos/presentaciones/bienvenida/bienvenida.html](https://ecologia2-master.github.io/recursos/recursos/presentaciones/bienvenida/bienvenida.html)
+- [Día 01. Bienvenida https://ecologia2-master.github.io/recursos/presentaciones/bienvenida/bienvenida.html](https://ecologia2-master.github.io/recursos/presentaciones/bienvenida/bienvenida.html)
 
 - [Fundamentos de Ecología de Poblaciones https://ecologia2-master.github.io/recursos/presentaciones/fundamentos-de-ecologia-de-poblaciones/fundamentos-ecologia-poblaciones.html](https://ecologia2-master.github.io/recursos/presentaciones/fundamentos-de-ecologia-de-poblaciones/fundamentos-ecologia-poblaciones.html)
 
