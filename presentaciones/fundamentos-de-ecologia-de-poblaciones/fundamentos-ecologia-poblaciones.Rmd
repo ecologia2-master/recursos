@@ -1,6 +1,6 @@
 ---
 title: "Ecología II"
-subtitle: "Día 01. Fundamentos de Ecología de Poblaciones"
+subtitle: "Unidad 1. Fundamentos de Ecología de Poblaciones"
 author: "Arlen Marmolejo"
 institute: "Universidad Autónoma de Santo Domingo (UASD)"
 date: "Actualizado: `r Sys.Date()`"
