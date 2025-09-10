@@ -213,6 +213,17 @@ $$
 - Ciclos presa–depredador.
 - Modificaciones: **respuesta funcional** (I–III), **refugios**, **saturación**.
 
+**Simbología:**
+
+- $N(t)$ presas; $P(t)$ depredadores;
+- $t$ tiempo;
+- $\frac{dN}{dt},\,\frac{dP}{dt}$ tasas de cambio;
+- $r$ crecimiento intrínseco (presas);
+- $a$ tasa de encuentro/ataque;
+- $b$ eficiencia de conversión;
+- $m$ mortalidad (depredadores).
+
+
 ---
 
 ### Mini-demo (R): trayectoria LV
@@ -312,19 +323,37 @@ $$
 \frac{dp}{dt}=c\,p(1-p)-e\,p,\qquad p^*=1-\frac{e}{c}\ (c>e)
 $$
 
-.small[
-```r
-# eval=FALSE
-levins <- function(p0=0.3, c=0.4, e=0.2, tmax=100){
+---
+### Metapoblaciones (Levins)
+
+$$
+\frac{dp}{dt}=c\,p(1-p)-e\,p,\qquad p^*=1-\frac{e}{c}\ (c>e)
+$$
+
+**Simbología:**
+- $p(t)$ fracción de parches ocupados (0–1);
+- $c$ tasa de colonización por parche ocupado (tiempo$^{-1}$);
+- $e$ tasa de extinción local (tiempo$^{-1}$);
+- $\frac{dp}{dt}$ cambio instantáneo en la fracción ocupada;
+- $p^*$ ocupación en equilibrio (si $c>e$).
+
+---
+
+```{r}
+levins <- function(p0=0.3, c=0.4, e=0.2, tmax=150){
   p <- numeric(tmax); p[1] <- p0
-  for (t in 2:tmax) p[t] <- p[t-1] + c*p[t-1]*(1-p[t-1]) - e*p[t-1]
-  p
+  for (t in 2:tmax) {
+    p[t] <- p[t-1] + c*p[t-1]*(1 - p[t-1]) - e*p[t-1]
+    p[t] <- max(0, min(1, p[t]))  # opcional: mantener p en [0,1]
+  }
+  list(t = 1:tmax, p = p, pstar = 1 - e/c)
 }
-t <- 1:150; p <- levins()
-plot(t, p, type='l', lwd=2, ylim=c(0,1), xlab='t', ylab='p (parches ocupados)')
-abline(h=1-0.2/0.4, lty=2, col=2)
+
+res <- levins(tmax = 150)
+plot(res$t, res$p, type='l', lwd=2, ylim=c(0,1),
+     xlab='t', ylab='p (parches ocupados)')
+abline(h = res$pstar, lty=2, col=2)
 ```
-]
 
 ---
 
