@@ -139,28 +139,44 @@ class: inverse, center, middle
 
 ---
 
-### LV Competencia: ecuaciones
+- LV Competencia: ecuaciones
+
+.tiny[
 
 $$\frac{{dN_1}}{{dt}} = r_1 N_1\left(1 - \frac{{N_1 + \alpha_{{12}} N_2}}{{K_1}}\right)$$
+
 $$\frac{{dN_2}}{{dt}} = r_2 N_2\left(1 - \frac{{N_2 + \alpha_{{21}} N_1}}{{K_2}}\right)$$
+
+| **Símbolo**                         | **Significado**                                                                    |
+|-------------------------------------|------------------------------------------------------------------------------------|
+| $$N_1,\ N_2$$                       | Tamaños poblacionales de las especies 1 y 2 (individuos).                         |
+| $$r_1,\ r_2$$                       | Tasas de crecimiento intrínsecas (tiempo\(^{-1}\)).                               |
+| $$K_1,\ K_2$$                       | Capacidades de carga para las especies 1 y 2 (individuos).                        |
+| $$\alpha_{12}$$                     | Efecto per cápita de la especie 2 sobre la 1 (adimensional, en “unidades” de 1).  |
+| $$\alpha_{21}$$                     | Efecto per cápita de la especie 1 sobre la 2 (adimensional, en “unidades” de 2).  |
+| $$t$$                               | Tiempo.                                                                            |
+| $$\dfrac{dN_1}{dt},\ \dfrac{dN_2}{dt}$$ | Tasas instantáneas de cambio poblacional (individuos·tiempo\(^{-1}\)).       |
+| $$N_1^{*},\ N_2^{*}$$               | Abundancias de equilibrio (si existe coexistencia).                                |
+]
+
+
 
 - Casos: exclusión 1, exclusión 2, coexistencia estable, coexistencia inestable.
 - Coexistencia si **intra > inter**.
 
----
+<!-- --- -->
 
-### Isoclinas (ilustración)
+<!-- ### Isoclinas (ilustración) -->
 
-![](isoclinas_lv.svg)
+<!-- ![](isoclinas_lv.svg) -->
 
-Diagrama cualitativo: ajustar $\alpha$ cambia pendientes y estabilidad.
+<!-- Diagrama cualitativo: ajustar $\alpha$ cambia pendientes y estabilidad. -->
 
 ---
 
 ### Mini-demo (R): isoclinas y fase (competencia)
 
-.small[
-```r
+```{r, echo=F}
 # eval=FALSE  # activa para correr la demo
 params <- list(r1=0.5, r2=0.4, K1=600, K2=500, a12=0.5, a21=0.6)
 isoclinas <- function(p) {
@@ -178,7 +194,7 @@ isoclinas <- function(p) {
 }
 isoclinas(params)
 ```
-]
+
 
 ---
 
@@ -201,8 +217,7 @@ $$
 
 ### Mini-demo (R): trayectoria LV
 
-.small[
-```r
+```{r, echo=F}
 # eval=FALSE
 library(deSolve)
 lv <- function(t, y, p) {
@@ -219,11 +234,11 @@ tt <- seq(0, 200, by=0.5)
 out <- as.data.frame(ode(y=y0, times=tt, func=lv, parms=p))
 plot(out$N, out$P, type='l', xlab='N', ylab='P')
 ```
-]
 
 ---
 
 class: inverse, center, middle
+
 # 4) Redes tróficas, cascadas y especies clave
 
 ---
@@ -238,8 +253,8 @@ class: inverse, center, middle
 
 ### Mini-demo (R): cadena simple con choque
 
-.small[
-```r
+
+```{r, echo=FALSE}
 # eval=FALSE
 t <- 1:200
 P <- numeric(200); H <- P; A <- P
@@ -253,7 +268,7 @@ for (i in 2:200) {
 matplot(t, cbind(P,H,A), type='l', lwd=2, lty=1, xlab='t', ylab='Biomasa')
 legend('topright', c('Productores','Herbívoros','Depredador'), col=1:3, lwd=2, bty='n')
 ```
-]
+
 
 ---
 
