@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Interacciones Biológicas y Dinámica Poblacional</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Interacciones Biológicas y Dinámica Poblacional
+]
+.subtitle[
+## Ecología II - Unidad 2
+]
+.date[
+### Actualizado: 2025-09-17
+]
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* Configuración básica responsiva */
+.remark-slide-content {
+  font-size: 18px;
+  line-height: 1.4;
+  padding: 1em 2em 1em 2em;
+  overflow: hidden;
+}
+
+/* Tamaños de encabezados */
+.remark-slide-content h1 { font-size: 2.2em; margin-bottom: 0.5em; }
+.remark-slide-content h2 { font-size: 1.6em; margin-bottom: 0.4em; }
+.remark-slide-content h3 { font-size: 1.3em; margin-bottom: 0.3em; }
+
+/* Ajustar márgenes */
+.remark-slide-content p { margin-bottom: 0.8em; }
+.remark-slide-content ul { margin-bottom: 0.5em; }
+.remark-slide-content li { margin-bottom: 0.3em; }
+
+/* Slide de título */
+.title-slide {
+  background-image: url('https://images.unsplash.com/photo-1566133781231-71f63aed1b71?ixlib=rb-4.0.3');
+  background-size: cover;
+  background-position: center;
+}
+
+.title-slide .remark-slide-content {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+/* Clases de tamaño */
+.large { font-size: 1.4em; }
+.medium { font-size: 1.1em; }
+.small { font-size: 0.9em; }
+.tiny { font-size: 0.8em; }
+.micro { font-size: 0.7em; }
+
+/* Colores */
+.green { color: #2E8B57; }
+.blue { color: #4169E1; }
+.red { color: #DC143C; }
+.orange { color: #FF8C00; }
+.purple { color: #8B5A96; }
+
+.highlight {
+  background-color: #ffff99;
+  padding: 1px 3px;
+  border-radius: 3px;
+}
+
+/* Cajas estilizadas */
+.box {
+  background-color: #f0f8ff;
+  border: 2px solid #4169E1;
+  border-radius: 8px;
+  padding: 0.8em;
+  margin: 0.5em 0;
+  font-size: 0.95em;
+}
+
+.equation {
+  background-color: #f5f5f5;
+  border-left: 4px solid #2E8B57;
+  padding: 0.8em;
+  margin: 0.5em 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.pull-left, .pull-right {
+  box-sizing: border-box;   /* incluye padding y border en el width */
+}
+
+/* Columnas con estilo */
+.pull-left { 
+  float: left; 
+  width: 47%; 
+  padding: 0.8em;
+  margin-right: 2%;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  border-left: 4px solid #2E8B57;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 0.85em;
+}
+
+.pull-right { 
+  float: right; 
+  width: 47%; 
+  padding: 0.8em;
+  margin-left: 2%;
+  background: linear-gradient(135deg, #fff5f5, #fed7d7);
+  border: 1px solid #feb2b2;
+  border-radius: 8px;
+  border-left: 4px solid #4169E1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 0.85em;
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+  .remark-slide-content { font-size: 16px; }
+  .pull-left, .pull-right { 
+    width: 100%; 
+    float: none; 
+    margin: 0.5em 0;
+    font-size: 0.8em;
+  }
+}
+
+/* Ajustes para modo presentación */
+@media screen and (min-width: 1400px) {
+  .remark-slide-content { 
+    font-size: 20px; 
+    padding: 2em 3em;
+  }
+}
+
+/* Espaciado compacto */
+.compact { margin: 0.2em 0; }
+.tight { line-height: 1.2; }
+
+.compact .remark-slide-content{
+  /* menos relleno arriba/abajo de la slide */
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+/* Títulos más pegados al contenido */
+.compact h1, .compact h2, .compact h3{
+  margin-top: 0.15em;
+  margin-bottom: 0.25em;
+}
+/* Párrafos y listas con menos interlínea y márgenes */
+.compact p, .compact li{
+  line-height: 1.15;
+  margin: 0.15em 0 0.15em 0;
+}
+/* Columas .pull-* sin “respiro” extra */
+.compact .pull-left, .compact .pull-right{
+  margin-top: 0.1em;
+}
+/* Imágenes sin márgenes adicionales */
+.compact img{
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+/* Cuando una imagen va dentro de un &lt;li&gt;, no metas aire extra */
+.compact li &gt; img{
+  margin: 0.1em 0 0.25em 0;
+}
+&lt;/style&gt;
+
+---
+class: title-slide, center, middle
+
+# .large[🔗 Interacciones Biológicas y Dinámica Poblacional]
+
+## .medium[Estrategias de Vida, Competencia, Depredación y Coevolución]
+
+### 17 de September, 2025
+
+---
+
+# 📋 Agenda de la Conferencia 
+
+.box[
+##  - Estrategias de Vida 
+- Ciclos de vida y estrategias reproductivas r y K
+
+##  - Competencia 
+- Interespecífica e intraespecífica, exclusión y coexistencia
+
+##  - Depredación y Otros 
+- Modelo Lotka-Volterra, mutualismo, comensalismo, parasitismo
+
+##  - Dinámicas Espaciales y Temporales 
+- Migración, dispersión, sucesión ecológica, redes tróficas
+]
+
+---
+class: inverse, center, middle
+
+# 🌱 BLOQUE 1
+# Estrategias de Vida y Ciclos Reproductivos
+
+---
+
+# 🔄 Estrategias Reproductivas: Teoría r-K
+
+## .blue[Conceptos Fundamentales]
+
+.box[
+**Teoría propuesta por MacArthur y Wilson (1967)**
+
+Las especies evolucionan hacia una de dos estrategias extremas según las presiones selectivas del ambiente:
+- **Selección r:** Ambientes impredecibles, alta mortalidad
+- **Selección K:** Ambientes estables, cerca de la capacidad de carga
+]
+---
+## Estrategias Reproductivas: Teoría r-K
+
+&lt;img src="interacciones-bologicas-y-dinamica-poblacional2_files/figure-html/r_k_comparison-1.png" width="100%" /&gt;
+
+---
+class: compact
+
+# 🐁 Estrategia r: Especialistas en Reproducción
+
+## .blue[Características Típicas]
+
+.pull-left[
+### **Historia de Vida**
+- **Madurez temprana:** 2-6 meses
+- **Reproducción rápida:** Múltiples camadas/año
+- **Descendencia numerosa:** 5-15 crías
+- **Vida corta:** 1-3 años
+- **Crecimiento rápido**
+
+### **Adaptaciones**
+- **Pequeño tamaño corporal**
+- **Mínimo cuidado parental**
+- **Desarrollo acelerado**
+- **Alta dispersión**
+- **Tolerancia a perturbaciones**
+]
+
+.pull-right[
+### **Ambientes Favorables**
+- **Inestables/impredecibles**
+- **Frecuentes perturbaciones**
+- **Recursos temporalmente abundantes**
+- **Baja competencia interespecífica**
+- **Alta mortalidad juvenil**
+
+### **Ventajas Evolutivas**
+- **Colonización rápida**
+- **Recuperación post-perturbación**
+- **Explotación de recursos efímeros**
+- **Escape de enemigos naturales**
+]
+
+.box[
+### 🔍 **Ejemplo Dominicano: Rata Noruega (*Rattus norvegicus*)**
+- **Madurez:** 5-6 semanas • **Gestación:** 21 días • **Camadas:** 4-6/año
+- **Crías/camada:** 6-12 • **Longevidad:** 2-3 años • **Peso:** 200-500g
+- **Hábitat:** Ambientes perturbados, urbanos, costeros
+]
+
+---
+class: compact
+
+# 🐘 Estrategia K: Especialistas en Competencia
+
+## .blue[Características Típicas]
+
+.pull-left[
+### **Historia de Vida**
+- **Madurez tardía:** 5-20 años
+- **Reproducción lenta:** 1 cría cada 2-5 años
+- **Descendencia escasa:** 1-3 crías
+- **Vida larga:** 30-100+ años
+- **Crecimiento lento y sostenido**
+
+### **Adaptaciones**
+- **Gran tamaño corporal**
+- **Cuidado parental intensivo**
+- **Desarrollo prolongado**
+- **Baja dispersión**
+- **Especialización ecológica**
+]
+
+.pull-right[
+### **Ambientes Favorables**
+- **Estables/predecibles**
+- **Cerca de capacidad de carga**
+- **Alta competencia interespecífica**
+- **Recursos limitados pero constantes**
+- **Baja mortalidad adulta**
+
+### **Ventajas Evolutivas**
+- **Eficiencia competitiva**
+- **Uso optimal de recursos**
+- **Supervivencia en ambientes saturados**
+- **Inversión en calidad vs cantidad**
+]
+
+.box[
+### 🔍 **Ejemplo Dominicano: Manatí Antillano (*Trichechus manatus*)**
+- **Madurez:** 5-9 años • **Gestación:** 12-13 meses • **Crías:** 1 cada 3-5 años
+- **Cuidado parental:** 1-2 años • **Longevidad:** 50-60 años • **Peso:** 200-600 kg
+- **Hábitat:** Aguas costeras estables, manglares protegidos
+]
+
+---
+
+# 🎯 Continuo r-K: Especies Intermedias
+
+## .blue[La Realidad es Más Compleja]
+
+&lt;img src="interacciones-bologicas-y-dinamica-poblacional2_files/figure-html/rk_continuum-1.png" width="100%" /&gt;
+
+.box[
+**🔍 Observación Clave:** La mayoría de especies están en posiciones **intermedias** del continuo, con diferentes combinaciones de rasgos según presiones evolutivas específicas.
+]
+
+---
+
+class: inverse, center, middle
+
+# ⚔️ BLOQUE 2
+# Competencia Inter e Intraespecífica
+
+---
+
+# 🥊 Competencia: Definiciones y Tipos
+
+## .blue[Conceptos Fundamentales]
+
+.box[
+**Competencia:** Interacción entre individuos que utilizan recursos limitados, resultando en reducción del fitness de al menos uno de los participantes.
+
+**Características clave:**
+- Recursos limitados en el ambiente
+- Demanda supera la oferta
+- Efecto negativo en crecimiento, supervivencia o reproducción
+]
+
+---
+## Competencia (continuación)
+
+.pull-left[
+### **Competencia Intraespecífica**
+- **Entre individuos** de la misma especie
+- **Recursos idénticos** requeridos
+- **Más intensa** por similitud de necesidades
+- **Efecto denso-dependiente**
+- **Autorregulación poblacional**
+
+### **Ejemplos:**
+- Territorio en aves
+- Sitios de anidación
+- Pareja reproductiva
+- Espacio y alimento
+]
+
+.pull-right[
+### **Competencia Interespecífica**  
+- **Entre especies diferentes**
+- **Recursos parcialmente solapados**
+- **Menos intensa** que intraespecífica
+- **Exclusión competitiva** posible
+- **Coexistencia por partición**
+
+### **Ejemplos:**
+- Polinizadores por flores
+- Depredadores por presas
+- Plantas por luz/nutrientes
+- Cavidades de anidación
+]
+
+---
+class: compact
+
+# 🔄 Mecanismos de Competencia
+
+## .blue[Tipos de Interacciones Competitivas]
+
+.pull-left[
+### **Competencia por Explotación**
+- **Uso eficiente** de recursos limitados
+- **Sin contacto directo** entre competidores
+- **"Quien llega primero"**
+- **Agotamiento del recurso**
+
+### **Características:**
+- Más común en plantas
+- Competencia por nutrientes
+- Forrajeo eficiente
+- Velocidad de crecimiento
+
+### **Ejemplo: Palmas vs *Cecropia* **
+- Ambas compiten por luz en claros
+- *Cecropia* crece más rápido
+- Palmas más eficientes a largo plazo
+- Resultado depende del tamaño del claro
+]
+
+.pull-right[
+### **Competencia por Interferencia**
+- **Interacciones directas** agresivas
+- **Comportamiento territorial**
+- **Defensa activa** de recursos
+- **Exclusión física**
+
+### **Características:**
+- Común en animales
+- Comportamientos agresivos
+- Marcaje territorial
+- Jerarquías de dominancia
+
+### **Ejemplo: Colibríes en Jardines**
+- *Anthracothorax* vs *Chlorostilbon*
+- Defensa agresiva de flores
+- Exclusión de territorios
+- Coexistencia por partición temporal
+]
+
+---
+
+&lt;img src="interacciones-bologicas-y-dinamica-poblacional2_files/figure-html/competition_mechanisms-1.png" width="100%" /&gt;
+
+---
+
+# ⚖️ Principio de Exclusión Competitiva (Gause)
+
+## .blue[Ley de Gause (1934)]
+
+.box[
+**"Dos especies que compiten por recursos idénticos no pueden coexistir indefinidamente"**
+
+### Predicciones:
+- Una especie excluye competitivamente a la otra
+- La especie "ganadora" tiene ventaja competitiva
+- Coexistencia solo es posible con diferenciación de nicho
+]
+
+---
+
+&lt;img src="interacciones-bologicas-y-dinamica-poblacional2_files/figure-html/gause_principle-1.png" width="100%" /&gt;
+
+---
+
+# 🤝 Coexistencia: Escape de la Exclusión
+
+## .blue[Mecanismos de Coexistencia]
+
+.pull-left[
+### **Partición de Recursos**
+- **División espacial:** Diferentes microhábitats
+- **División temporal:** Actividad en horarios distintos
+- **División trófica:** Dietas especializadas
+- **Diferenciación morfológica**
+
+### **Ejemplo: *Anolis* Dominicanos**
+- ** *A. cybotes*:** Troncos bajos, crepuscular
+- ** *A. coelestinus*:** Canopeo alto, diurno  
+- ** *A. chlorocyanus*:** Sotobosque, matutino
+- **Coexistencia:** Por partición vertical y temporal
+]
+
+.pull-right[
+### **Facilitación**
+- **Modificación positiva** del ambiente
+- **Reducción de estrés** abiótico
+- **Creación de microhábitats**
+- **Sucesión facilitada**
+
+### **Ejemplo: Manglares de Montecristi**
+- ** *Rhizophora* ** establece primer colonización
+- **Reduce salinidad** del sustrato
+- **Facilita entrada** de *Avicennia* y *Laguncularia*
+- **Coexistencia:** Por facilitación sucesional
+]
+
+---
+
+&lt;img src="interacciones-bologicas-y-dinamica-poblacional2_files/figure-html/coexistence_mechanisms-1.png" width="100%" /&gt;
+
+---
+class: inverse, center, middle
+
+# 🦁 BLOQUE 3
+# Depredación y Otras Interacciones
+
+---
+
+# 🎯 Modelo Lotka-Volterra: Depredador-Presa
+
+## .blue[Ecuaciones Fundamentales]
+
+.equation[
+**Presa:** dN/dt = rN - aNP
+
+**Depredador:** dP/dt = eaNP - mP
+
+Donde:
+- **N** = Población de presas
+- **P** = Población de depredadores  
+- **r** = Tasa intrínseca de crecimiento de presas
+- **a** = Tasa de ataque del depredador
+- **e** = Eficiencia de conversión
+- **m** = Mortalidad del depredador
+]
+
+---
+
+&lt;img src="interacciones-bologicas-y-dinamica-poblacional2_files/figure-html/lotka_volterra2-1.png" width="100%" /&gt;
+
+---
+
+&lt;img src="interacciones-bologicas-y-dinamica-poblacional2_files/figure-html/lotka_volterra-1.png" width="100%" /&gt;
+  
+---
+class: compact
+
+.small[
+
+# 🔄 Fases del Ciclo Depredador-Presa
+
+## .blue[Secuencia Temporal de Eventos]
+
+.pull-left[
+### **Fase 1: Abundancia de Presas**
+- **Presas abundantes** → Crecimiento exponencial
+- **Depredadores escasos** → Baja presión de depredación
+- **Resultado:** Población de presas aumenta
+
+### **Fase 2: Crecimiento de Depredadores**  
+- **Alimento abundante** → Reproducción exitosa
+- **Baja mortalidad** de depredadores
+- **Resultado:** Población de depredadores aumenta
+
+### **Fase 3: Declive de Presas**
+- **Alta presión** de depredación
+- **Mortalidad supera** natalidad
+- **Resultado:** Población de presas disminuye
+]
+
+.pull-right[
+### **Fase 4: Declive de Depredadores**
+- **Escasez de alimento** → Baja reproducción
+- **Alta mortalidad** por inanición
+- **Resultado:** Población de depredadores disminuye
+
+### **Retorno a Fase 1**
+- **Liberación** de presión sobre presas
+- **Inicio** de nuevo ciclo
+- **Oscilaciones continuas**
+
+### **Desfase Temporal**
+- Picos de depredadores **siguen** a picos de presas
+- Período típico: 3-10 años
+- Amplitud depende de parámetros del sistema
+]
+
+.box[
+### 🔍 **Ejemplo: Liebre vs Lince en Canadá (Datos Históricos)**
+Registros de pieles (1845-1935) muestran ciclos de ~10 años con desfase de 1-2 años entre picos de liebre
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "%current%",
+  "ratio": "16:10"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

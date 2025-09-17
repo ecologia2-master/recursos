@@ -1,0 +1,834 @@
+---
+title: "Interacciones Biológicas y Dinámica Poblacional"
+subtitle: "Ecología II - Unidad 2"
+date: "Actualizado: `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%"
+      ratio: "16:10"
+    seal: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  fig.width = 10, 
+  fig.height = 6, 
+  fig.retina = 3,
+  out.width = "100%",
+  cache = FALSE,
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+
+# Cargar librerías necesarias
+suppressPackageStartupMessages({
+  library(ggplot2)
+  library(dplyr)
+  library(knitr)
+  library(viridis)
+})
+
+# Configurar tema por defecto
+theme_set(theme_minimal())
+```
+
+```{css, echo=FALSE}
+/* Configuración básica responsiva */
+.remark-slide-content {
+  font-size: 18px;
+  line-height: 1.4;
+  padding: 1em 2em 1em 2em;
+  overflow: hidden;
+}
+
+/* Tamaños de encabezados */
+.remark-slide-content h1 { font-size: 2.2em; margin-bottom: 0.5em; }
+.remark-slide-content h2 { font-size: 1.6em; margin-bottom: 0.4em; }
+.remark-slide-content h3 { font-size: 1.3em; margin-bottom: 0.3em; }
+
+/* Ajustar márgenes */
+.remark-slide-content p { margin-bottom: 0.8em; }
+.remark-slide-content ul { margin-bottom: 0.5em; }
+.remark-slide-content li { margin-bottom: 0.3em; }
+
+/* Slide de título */
+.title-slide {
+  background-image: url('https://images.unsplash.com/photo-1566133781231-71f63aed1b71?ixlib=rb-4.0.3');
+  background-size: cover;
+  background-position: center;
+}
+
+.title-slide .remark-slide-content {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+/* Clases de tamaño */
+.large { font-size: 1.4em; }
+.medium { font-size: 1.1em; }
+.small { font-size: 0.9em; }
+.tiny { font-size: 0.8em; }
+.micro { font-size: 0.7em; }
+
+/* Colores */
+.green { color: #2E8B57; }
+.blue { color: #4169E1; }
+.red { color: #DC143C; }
+.orange { color: #FF8C00; }
+.purple { color: #8B5A96; }
+
+.highlight {
+  background-color: #ffff99;
+  padding: 1px 3px;
+  border-radius: 3px;
+}
+
+/* Cajas estilizadas */
+.box {
+  background-color: #f0f8ff;
+  border: 2px solid #4169E1;
+  border-radius: 8px;
+  padding: 0.8em;
+  margin: 0.5em 0;
+  font-size: 0.95em;
+}
+
+.equation {
+  background-color: #f5f5f5;
+  border-left: 4px solid #2E8B57;
+  padding: 0.8em;
+  margin: 0.5em 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.pull-left, .pull-right {
+  box-sizing: border-box;   /* incluye padding y border en el width */
+}
+
+/* Columnas con estilo */
+.pull-left { 
+  float: left; 
+  width: 47%; 
+  padding: 0.8em;
+  margin-right: 2%;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  border-left: 4px solid #2E8B57;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 0.85em;
+}
+
+.pull-right { 
+  float: right; 
+  width: 47%; 
+  padding: 0.8em;
+  margin-left: 2%;
+  background: linear-gradient(135deg, #fff5f5, #fed7d7);
+  border: 1px solid #feb2b2;
+  border-radius: 8px;
+  border-left: 4px solid #4169E1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 0.85em;
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+  .remark-slide-content { font-size: 16px; }
+  .pull-left, .pull-right { 
+    width: 100%; 
+    float: none; 
+    margin: 0.5em 0;
+    font-size: 0.8em;
+  }
+}
+
+/* Ajustes para modo presentación */
+@media screen and (min-width: 1400px) {
+  .remark-slide-content { 
+    font-size: 20px; 
+    padding: 2em 3em;
+  }
+}
+
+/* Espaciado compacto */
+.compact { margin: 0.2em 0; }
+.tight { line-height: 1.2; }
+
+.compact .remark-slide-content{
+  /* menos relleno arriba/abajo de la slide */
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+/* Títulos más pegados al contenido */
+.compact h1, .compact h2, .compact h3{
+  margin-top: 0.15em;
+  margin-bottom: 0.25em;
+}
+/* Párrafos y listas con menos interlínea y márgenes */
+.compact p, .compact li{
+  line-height: 1.15;
+  margin: 0.15em 0 0.15em 0;
+}
+/* Columas .pull-* sin “respiro” extra */
+.compact .pull-left, .compact .pull-right{
+  margin-top: 0.1em;
+}
+/* Imágenes sin márgenes adicionales */
+.compact img{
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+/* Cuando una imagen va dentro de un <li>, no metas aire extra */
+.compact li > img{
+  margin: 0.1em 0 0.25em 0;
+}
+```
+
+---
+class: title-slide, center, middle
+
+# .large[🔗 Interacciones Biológicas y Dinámica Poblacional]
+
+## .medium[Estrategias de Vida, Competencia, Depredación y Coevolución]
+
+### `r format(Sys.Date(), "%d de %B, %Y")`
+
+---
+
+# 📋 Agenda de la Conferencia 
+
+.box[
+##  - Estrategias de Vida 
+- Ciclos de vida y estrategias reproductivas r y K
+
+##  - Competencia 
+- Interespecífica e intraespecífica, exclusión y coexistencia
+
+##  - Depredación y Otros 
+- Modelo Lotka-Volterra, mutualismo, comensalismo, parasitismo
+
+##  - Dinámicas Espaciales y Temporales 
+- Migración, dispersión, sucesión ecológica, redes tróficas
+]
+
+---
+class: inverse, center, middle
+
+# 🌱 BLOQUE 1
+# Estrategias de Vida y Ciclos Reproductivos
+
+---
+
+# 🔄 Estrategias Reproductivas: Teoría r-K
+
+## .blue[Conceptos Fundamentales]
+
+.box[
+**Teoría propuesta por MacArthur y Wilson (1967)**
+
+Las especies evolucionan hacia una de dos estrategias extremas según las presiones selectivas del ambiente:
+- **Selección r:** Ambientes impredecibles, alta mortalidad
+- **Selección K:** Ambientes estables, cerca de la capacidad de carga
+]
+---
+## Estrategias Reproductivas: Teoría r-K
+
+```{r r_k_comparison, fig.height=5}
+# Crear datos comparativos para estrategias r y K
+traits <- c("Tamaño corporal", "Longevidad", "Edad reproductiva", 
+           "Tamaño camada", "Cuidado parental", "Tasa mortalidad",
+           "Desarrollo", "Competencia")
+
+r_values <- c(1, 1, 1, 5, 1, 5, 5, 2)
+K_values <- c(5, 5, 4, 1, 5, 1, 1, 5)
+
+rk_data <- data.frame(
+  trait = rep(traits, 2),
+  value = c(r_values, K_values),
+  strategy = rep(c("Estrategia r", "Estrategia K"), each = length(traits))
+)
+
+rk_data$trait <- factor(rk_data$trait, levels = rev(traits))
+
+ggplot(rk_data, aes(x = trait, y = value, fill = strategy)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  coord_flip() +
+  scale_fill_manual(values = c("#FF6B6B", "#4ECDC4")) +
+  scale_y_continuous(breaks = 1:5, 
+                     labels = c("Muy bajo", "Bajo", "Medio", "Alto", "Muy alto")) +
+  theme_minimal() +
+  theme(legend.position = "top",
+        legend.title = element_blank(),
+        plot.title = element_text(size = 14, face = "bold", hjust = 0.5)) +
+  labs(title = "Comparación de Estrategias Reproductivas r vs K",
+       x = "Características de Historia de Vida",
+       y = "Nivel de la Característica")
+```
+
+---
+class: compact
+
+# 🐁 Estrategia r: Especialistas en Reproducción
+
+## .blue[Características Típicas]
+
+.pull-left[
+### **Historia de Vida**
+- **Madurez temprana:** 2-6 meses
+- **Reproducción rápida:** Múltiples camadas/año
+- **Descendencia numerosa:** 5-15 crías
+- **Vida corta:** 1-3 años
+- **Crecimiento rápido**
+
+### **Adaptaciones**
+- **Pequeño tamaño corporal**
+- **Mínimo cuidado parental**
+- **Desarrollo acelerado**
+- **Alta dispersión**
+- **Tolerancia a perturbaciones**
+]
+
+.pull-right[
+### **Ambientes Favorables**
+- **Inestables/impredecibles**
+- **Frecuentes perturbaciones**
+- **Recursos temporalmente abundantes**
+- **Baja competencia interespecífica**
+- **Alta mortalidad juvenil**
+
+### **Ventajas Evolutivas**
+- **Colonización rápida**
+- **Recuperación post-perturbación**
+- **Explotación de recursos efímeros**
+- **Escape de enemigos naturales**
+]
+
+.box[
+### 🔍 **Ejemplo Dominicano: Rata Noruega (*Rattus norvegicus*)**
+- **Madurez:** 5-6 semanas • **Gestación:** 21 días • **Camadas:** 4-6/año
+- **Crías/camada:** 6-12 • **Longevidad:** 2-3 años • **Peso:** 200-500g
+- **Hábitat:** Ambientes perturbados, urbanos, costeros
+]
+
+---
+class: compact
+
+# 🐘 Estrategia K: Especialistas en Competencia
+
+## .blue[Características Típicas]
+
+.pull-left[
+### **Historia de Vida**
+- **Madurez tardía:** 5-20 años
+- **Reproducción lenta:** 1 cría cada 2-5 años
+- **Descendencia escasa:** 1-3 crías
+- **Vida larga:** 30-100+ años
+- **Crecimiento lento y sostenido**
+
+### **Adaptaciones**
+- **Gran tamaño corporal**
+- **Cuidado parental intensivo**
+- **Desarrollo prolongado**
+- **Baja dispersión**
+- **Especialización ecológica**
+]
+
+.pull-right[
+### **Ambientes Favorables**
+- **Estables/predecibles**
+- **Cerca de capacidad de carga**
+- **Alta competencia interespecífica**
+- **Recursos limitados pero constantes**
+- **Baja mortalidad adulta**
+
+### **Ventajas Evolutivas**
+- **Eficiencia competitiva**
+- **Uso optimal de recursos**
+- **Supervivencia en ambientes saturados**
+- **Inversión en calidad vs cantidad**
+]
+
+.box[
+### 🔍 **Ejemplo Dominicano: Manatí Antillano (*Trichechus manatus*)**
+- **Madurez:** 5-9 años • **Gestación:** 12-13 meses • **Crías:** 1 cada 3-5 años
+- **Cuidado parental:** 1-2 años • **Longevidad:** 50-60 años • **Peso:** 200-600 kg
+- **Hábitat:** Aguas costeras estables, manglares protegidos
+]
+
+---
+
+# 🎯 Continuo r-K: Especies Intermedias
+
+## .blue[La Realidad es Más Compleja]
+
+```{r rk_continuum, fig.height=3}
+
+# Crear datos para mostrar el continuo r-K CORREGIDO
+species_data <- data.frame(
+  species = c("Mosquito *Aedes*", "Rata noruega", "Iguana verde", 
+              "Lechuza", "Jutía", "Manatí", "Tortuga carey"),
+  # VALORES INVERTIDOS: Ahora un valor alto significa más K.
+  k_score = c(0.5, 1.5, 4.0, 4.5, 6.0, 7.5, 8.0), # Antes era r_score
+  longevity = c(0.1, 2, 15, 10, 8, 60, 80),
+  body_size = c(0.001, 0.3, 4, 0.5, 2, 400, 80),
+  offspring = c(200, 40, 30, 4, 3, 1, 3)
+)
+
+ggplot(species_data, aes(x = reorder(species, k_score), y = k_score)) +
+  geom_col(aes(fill = k_score), alpha = 0.8) +
+  geom_text(aes(label = species), angle = 0, hjust = 1.1, vjust = 0.3, size = 3) +
+  scale_fill_viridis_c(name = "Puntuación\nK", option = "plasma") +
+  coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "right",
+        plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+        axis.text.y = element_blank()) +
+  labs(title = "Continuo de Estrategias de Historia de Vida",
+       subtitle = "De estrategia r (izquierda) a estrategia K (derecha)",
+       x = "Especies", 
+       # ETIQUETA DEL EJE Y CAMBIADA para reflejar correctamente la escala
+       y = "Puntuación de Selección K (Valor alto = más K)")
+```
+
+.box[
+**🔍 Observación Clave:** La mayoría de especies están en posiciones **intermedias** del continuo, con diferentes combinaciones de rasgos según presiones evolutivas específicas.
+]
+
+---
+
+class: inverse, center, middle
+
+# ⚔️ BLOQUE 2
+# Competencia Inter e Intraespecífica
+
+---
+
+# 🥊 Competencia: Definiciones y Tipos
+
+## .blue[Conceptos Fundamentales]
+
+.box[
+**Competencia:** Interacción entre individuos que utilizan recursos limitados, resultando en reducción del fitness de al menos uno de los participantes.
+
+**Características clave:**
+- Recursos limitados en el ambiente
+- Demanda supera la oferta
+- Efecto negativo en crecimiento, supervivencia o reproducción
+]
+
+---
+## Competencia (continuación)
+
+.pull-left[
+### **Competencia Intraespecífica**
+- **Entre individuos** de la misma especie
+- **Recursos idénticos** requeridos
+- **Más intensa** por similitud de necesidades
+- **Efecto denso-dependiente**
+- **Autorregulación poblacional**
+
+### **Ejemplos:**
+- Territorio en aves
+- Sitios de anidación
+- Pareja reproductiva
+- Espacio y alimento
+]
+
+.pull-right[
+### **Competencia Interespecífica**  
+- **Entre especies diferentes**
+- **Recursos parcialmente solapados**
+- **Menos intensa** que intraespecífica
+- **Exclusión competitiva** posible
+- **Coexistencia por partición**
+
+### **Ejemplos:**
+- Polinizadores por flores
+- Depredadores por presas
+- Plantas por luz/nutrientes
+- Cavidades de anidación
+]
+
+---
+class: compact
+
+# 🔄 Mecanismos de Competencia
+
+## .blue[Tipos de Interacciones Competitivas]
+
+.pull-left[
+### **Competencia por Explotación**
+- **Uso eficiente** de recursos limitados
+- **Sin contacto directo** entre competidores
+- **"Quien llega primero"**
+- **Agotamiento del recurso**
+
+### **Características:**
+- Más común en plantas
+- Competencia por nutrientes
+- Forrajeo eficiente
+- Velocidad de crecimiento
+
+### **Ejemplo: Palmas vs *Cecropia* **
+- Ambas compiten por luz en claros
+- *Cecropia* crece más rápido
+- Palmas más eficientes a largo plazo
+- Resultado depende del tamaño del claro
+]
+
+.pull-right[
+### **Competencia por Interferencia**
+- **Interacciones directas** agresivas
+- **Comportamiento territorial**
+- **Defensa activa** de recursos
+- **Exclusión física**
+
+### **Características:**
+- Común en animales
+- Comportamientos agresivos
+- Marcaje territorial
+- Jerarquías de dominancia
+
+### **Ejemplo: Colibríes en Jardines**
+- *Anthracothorax* vs *Chlorostilbon*
+- Defensa agresiva de flores
+- Exclusión de territorios
+- Coexistencia por partición temporal
+]
+
+---
+
+```{r competition_mechanisms, fig.height=4}
+# Gráfico conceptual de mecanismos de competencia
+resource_time <- seq(0, 10, by = 0.1)
+
+# Competencia por explotación
+exploitation_A <- 100 * exp(-0.3 * resource_time)
+exploitation_B <- 100 * exp(-0.5 * resource_time)
+
+# Competencia por interferencia (con eventos de exclusión)
+interference_A <- ifelse(resource_time < 3, 80, ifelse(resource_time < 6, 40, 10))
+interference_B <- ifelse(resource_time < 3, 60, ifelse(resource_time < 6, 90, 80))
+
+comp_data <- data.frame(
+  time = rep(resource_time, 4),
+  resource = c(exploitation_A, exploitation_B, interference_A, interference_B),
+  species = rep(c("Especie A", "Especie B"), each = length(resource_time), times = 2),
+  mechanism = rep(c("Explotación", "Interferencia"), each = 2 * length(resource_time))
+)
+
+ggplot(comp_data, aes(x = time, y = resource, color = species)) +
+  geom_line(size = 1.5) +
+  facet_wrap(~mechanism, ncol = 2) +
+  scale_color_manual(values = c("#FF6B6B", "#4ECDC4")) +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        strip.text = element_text(size = 12, face = "bold"),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+  labs(title = "Mecanismos de Competencia por Recursos",
+       x = "Tiempo", 
+       y = "Disponibilidad de Recurso (%)")
+```
+
+---
+
+# ⚖️ Principio de Exclusión Competitiva (Gause)
+
+## .blue[Ley de Gause (1934)]
+
+.box[
+**"Dos especies que compiten por recursos idénticos no pueden coexistir indefinidamente"**
+
+### Predicciones:
+- Una especie excluye competitivamente a la otra
+- La especie "ganadora" tiene ventaja competitiva
+- Coexistencia solo es posible con diferenciación de nicho
+]
+
+---
+
+```{r gause_principle, fig.height=4.5}
+# Simulación del experimento clásico de Gause con Paramecium
+time_days <- seq(0, 25, by = 1)
+
+# *P. aurelia* sola (control)
+aurelia_alone <- 100 / (1 + 99 * exp(-0.3 * time_days))
+
+# *P. caudatum* sola (control)  
+caudatum_alone <- 80 / (1 + 79 * exp(-0.25 * time_days))
+
+# Competencia (P. aurelia gana)
+aurelia_comp <- 60 / (1 + 59 * exp(-0.2 * time_days))
+caudatum_comp <- pmax(0, 40 * exp(-0.1 * time_days) * (1 - aurelia_comp/60))
+
+gause_data <- data.frame(
+  day = rep(time_days, 4),
+  population = c(aurelia_alone, caudatum_alone, aurelia_comp, caudatum_comp),
+  species = rep(c("P. aurelia", "P. caudatum"), each = length(time_days), times = 2),
+  treatment = rep(c("Monocultivo", "Competencia"), each = 2 * length(time_days))
+)
+
+ggplot(gause_data, aes(x = day, y = population, color = species, linetype = treatment)) +
+  geom_line(size = 1.3) +
+  scale_color_manual(values = c("#FF6B6B", "#4ECDC4")) +
+  scale_linetype_manual(values = c("solid", "dotted")) +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+  labs(title = "Experimento Clásico de Gause: Exclusión Competitiva",
+       subtitle = expression(italic("Paramecium aurelia") ~ "excluye a" ~ italic("P. caudatum") ~ "en competencia"),
+       x = "Días", 
+       y = "Densidad Poblacional",
+       color = "Especies",
+       linetype = "Tratamiento")
+```
+
+---
+
+# 🤝 Coexistencia: Escape de la Exclusión
+
+## .blue[Mecanismos de Coexistencia]
+
+.pull-left[
+### **Partición de Recursos**
+- **División espacial:** Diferentes microhábitats
+- **División temporal:** Actividad en horarios distintos
+- **División trófica:** Dietas especializadas
+- **Diferenciación morfológica**
+
+### **Ejemplo: *Anolis* Dominicanos**
+- ** *A. cybotes*:** Troncos bajos, crepuscular
+- ** *A. coelestinus*:** Canopeo alto, diurno  
+- ** *A. chlorocyanus*:** Sotobosque, matutino
+- **Coexistencia:** Por partición vertical y temporal
+]
+
+.pull-right[
+### **Facilitación**
+- **Modificación positiva** del ambiente
+- **Reducción de estrés** abiótico
+- **Creación de microhábitats**
+- **Sucesión facilitada**
+
+### **Ejemplo: Manglares de Montecristi**
+- ** *Rhizophora* ** establece primer colonización
+- **Reduce salinidad** del sustrato
+- **Facilita entrada** de *Avicennia* y *Laguncularia*
+- **Coexistencia:** Por facilitación sucesional
+]
+
+---
+
+```{r coexistence_mechanisms, fig.height=4}
+# Gráfico de nicho multidimensional
+set.seed(123)
+n_points <- 50
+
+# Especie A - nicho en dimensión X-Y
+species_A_x <- rnorm(n_points, 3, 1)
+species_A_y <- rnorm(n_points, 3, 1)
+
+# Especie B - nicho en dimensión X-Z (partición)
+species_B_x <- rnorm(n_points, 5, 1)
+species_B_y <- rnorm(n_points, 5, 1)
+
+coexist_data <- data.frame(
+  x = c(species_A_x, species_B_x),
+  y = c(species_A_y, species_B_y),
+  species = rep(c("Especie A", "Especie B"), each = n_points)
+)
+
+ggplot(coexist_data, aes(x = x, y = y, color = species)) +
+  geom_point(alpha = 0.7, size = 2) +
+  stat_ellipse(level = 0.9, size = 1.2) +
+  scale_color_manual(values = c("#FF6B6B", "#4ECDC4")) +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        plot.title = element_text(size = 13, face = "bold", hjust = 0.5)) +
+  labs(title = "Coexistencia por Partición de Nicho",
+       subtitle = "Especies ocupan diferentes regiones del espacio de recursos",
+       x = "Dimensión de Nicho 1 (ej: tamaño de presa)",
+       y = "Dimensión de Nicho 2 (ej: altura de forrajeo)")
+```
+
+---
+class: inverse, center, middle
+
+# 🦁 BLOQUE 3
+# Depredación y Otras Interacciones
+
+---
+
+# 🎯 Modelo Lotka-Volterra: Depredador-Presa
+
+## .blue[Ecuaciones Fundamentales]
+
+.equation[
+**Presa:** dN/dt = rN - aNP
+
+**Depredador:** dP/dt = eaNP - mP
+
+Donde:
+- **N** = Población de presas
+- **P** = Población de depredadores  
+- **r** = Tasa intrínseca de crecimiento de presas
+- **a** = Tasa de ataque del depredador
+- **e** = Eficiencia de conversión
+- **m** = Mortalidad del depredador
+]
+
+---
+
+```{r lotka_volterra2, fig.height=5}
+# Simulación del modelo Lotka-Volterra
+library(deSolve)
+
+# Parámetros del modelo
+parms <- c(r = 0.1, a = 0.01, e = 0.02, m = 0.1)
+
+# Función del sistema de ecuaciones
+lotka_volterra <- function(t, state, parms) {
+  with(as.list(c(state, parms)), {
+    dN <- r*N - a*N*P
+    dP <- e*a*N*P - m*P
+    list(c(dN, dP))
+  })
+}
+
+# Condiciones iniciales
+state <- c(N = 50, P = 10)
+times <- seq(0, 50, by = 0.1)
+
+# Resolver las ecuaciones
+lv_solution <- ode(y = state, times = times, func = lotka_volterra, parms = parms)
+lv_df <- as.data.frame(lv_solution)
+
+# Convertir a formato largo para ggplot
+lv_long <- reshape2::melt(lv_df, id.vars = "time", variable.name = "species", value.name = "population")
+lv_long$species <- factor(lv_long$species, levels = c("N", "P"), labels = c("Presas", "Depredadores"))
+
+ggplot(lv_long, aes(x = time, y = population, color = species)) +
+  geom_line(size = 1.5) +
+  scale_color_manual(values = c("#4ECDC4", "#FF6B6B")) +
+  theme_minimal() +
+  theme(legend.position = "top",
+        legend.title = element_blank(),
+        plot.title = element_text(size = 14, face = "bold", hjust = 0.5)) +
+  labs(title = "Modelo Lotka-Volterra: Depredador-Presa",
+       subtitle = "Dinámicas cíclicas en poblaciones interactuantes",
+       x = "Tiempo", 
+       y = "Tamaño Poblacional")
+```
+
+---
+
+```{r lotka_volterra, fig.height=5}
+# Simulación del modelo Lotka-Volterra
+library(deSolve)
+library(ggplot2)
+library(reshape2)
+
+# Parámetros del modelo AJUSTADOS para oscilaciones
+parms <- c(r = 1.0,    # Tasa de crecimiento de presas (aumentada)
+           a = 0.1,    # Tasa de depredación (aumentada)
+           e = 0.075,  # Eficiencia de conversión (ajustada)
+           m = 0.5)    # Tasa de mortalidad de depredadores (aumentada)
+
+# Función del sistema de ecuaciones
+lotka_volterra <- function(t, state, parms) {
+  with(as.list(c(state, parms)), {
+    dN <- r*N - a*N*P
+    dP <- e*a*N*P - m*P
+    list(c(dN, dP))
+  })
+}
+
+# Condiciones iniciales (más desbalanceadas para ver oscilación)
+state <- c(N = 15, P = 5)  # Menos presas, más depredadores iniciales
+times <- seq(0, 50, by = 0.1)
+
+# Resolver las ecuaciones
+lv_solution <- ode(y = state, times = times, func = lotka_volterra, parms = parms)
+lv_df <- as.data.frame(lv_solution)
+
+# Convertir a formato largo para ggplot
+lv_long <- reshape2::melt(lv_df, id.vars = "time", variable.name = "species", value.name = "population")
+lv_long$species <- factor(lv_long$species, levels = c("N", "P"), labels = c("Presas", "Depredadores"))
+
+ggplot(lv_long, aes(x = time, y = population, color = species)) +
+  geom_line(size = 1.2, alpha = 0.8) +
+  scale_color_manual(values = c("#4ECDC4", "#FF6B6B")) +
+  theme_minimal() +
+  theme(legend.position = "top",
+        legend.title = element_blank(),
+        plot.title = element_text(size = 14, face = "bold", hjust = 0.5)) +
+  labs(title = "Modelo Lotka-Volterra: Oscilaciones Depredador-Presa",
+       subtitle = "Dinámicas cíclicas en poblaciones interactuantes",
+       x = "Tiempo", 
+       y = "Tamaño Poblacional") +
+  # Añadir una guía para ayudar a visualizar el desfase
+  geom_hline(yintercept = mean(lv_df$N), linetype = "dashed", color = "#4ECDC4", alpha = 0.5) +
+  geom_hline(yintercept = mean(lv_df$P), linetype = "dashed", color = "#FF6B6B", alpha = 0.5)
+```
+  
+---
+class: compact
+
+.small[
+
+# 🔄 Fases del Ciclo Depredador-Presa
+
+## .blue[Secuencia Temporal de Eventos]
+
+.pull-left[
+### **Fase 1: Abundancia de Presas**
+- **Presas abundantes** → Crecimiento exponencial
+- **Depredadores escasos** → Baja presión de depredación
+- **Resultado:** Población de presas aumenta
+
+### **Fase 2: Crecimiento de Depredadores**  
+- **Alimento abundante** → Reproducción exitosa
+- **Baja mortalidad** de depredadores
+- **Resultado:** Población de depredadores aumenta
+
+### **Fase 3: Declive de Presas**
+- **Alta presión** de depredación
+- **Mortalidad supera** natalidad
+- **Resultado:** Población de presas disminuye
+]
+
+.pull-right[
+### **Fase 4: Declive de Depredadores**
+- **Escasez de alimento** → Baja reproducción
+- **Alta mortalidad** por inanición
+- **Resultado:** Población de depredadores disminuye
+
+### **Retorno a Fase 1**
+- **Liberación** de presión sobre presas
+- **Inicio** de nuevo ciclo
+- **Oscilaciones continuas**
+
+### **Desfase Temporal**
+- Picos de depredadores **siguen** a picos de presas
+- Período típico: 3-10 años
+- Amplitud depende de parámetros del sistema
+]
+
+.box[
+### 🔍 **Ejemplo: Liebre vs Lince en Canadá (Datos Históricos)**
+Registros de pieles (1845-1935) muestran ciclos de ~10 años con desfase de 1-2 años entre picos de liebre
+]
+]
