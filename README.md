@@ -8,4 +8,4 @@
 
 - [Interacciones biológicas y dinámica poblacional https://ecologia2-master.github.io/recursos/presentaciones/interacciones-bologicas-y-dinamica-poblacional/interacciones-biologicas-dinamica-poblacional.html](https://ecologia2-master.github.io/recursos/presentaciones/interacciones-bologicas-y-dinamica-poblacional/interacciones-biologicas-dinamica-poblacional.html)
 
-- [Interacciones biológicas y dinámica poblacional 2 https://ecologia2-master.github.io/recursos/presentaciones/interacciones-bologicas-y-dinamica-poblacional2/interacciones-bologicas-dinamica-poblacional2.html](https://ecologia2-master.github.io/recursos/presentaciones/interacciones-bologicas-y-dinamica-poblacional2/interacciones-biologicas-y-dinamica-poblacional2.html)
+- [Interacciones biológicas y dinámica poblacional 2 https://ecologia2-master.github.io/recursos/presentaciones/interacciones-bologicas-y-dinamica-poblacional2/interacciones-bologicas-y-dinamica-poblacional2.html](https://ecologia2-master.github.io/recursos/presentaciones/interacciones-bologicas-y-dinamica-poblacional2/interacciones-bologicas-y-dinamica-poblacional2.html)
